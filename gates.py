@@ -19,6 +19,9 @@ def newGate():
     if gateName == "AndGate" or gateName == "NotGate":
         print("Cannot Overwrite And or Not gates")
         return
+    if gateName == "__init__":
+        print("Don't do that.")
+        return
     functionFile = open(os.path.join("gates", gateName + ".py"), "w")
     inputs = input("Name your inputs: ").split(" ")
     functionFile.write("# ")
@@ -49,10 +52,13 @@ def newGate():
             outputList.append(command[1])
         else:
             functionFile.write("    import gates."+ command[0]+ "\n")
-            functionFile.write("    "+command[1]+" = gates."+command[0]+".function([")
-            for i in range(2, len(command)-1):
-                functionFile.write(command[i]+", ")
-            functionFile.write(command[len(command)-1]+"])\n")
+            if len(command) < 4:
+                functionFile.write("    "+command[1]+" = gates."+command[0]+".function(["+command[2]+"])\n")
+            else:
+                functionFile.write("    "+command[1]+" = gates."+command[0]+".function(list((")
+                for i in range(2, len(command)-1):
+                    functionFile.write(command[i]+", ")
+                functionFile.write(command[len(command)-1]+")))\n")
 
 def executeGate():
     showGates()

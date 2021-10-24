@@ -55,9 +55,13 @@ def newGate():
             if len(command) < 4:
                 for i in inputs:
                     if command[2] == i:
-                        functionFile.write("    "+command[1]+" = gates."+command[0]+".function(["+command[2]+"])\n")
+                        isInput = True
                     else:
-                        functionFile.write("    "+command[1]+" = gates."+command[0]+".function(["+command[2]+"])\n")
+                        isInput = False
+                if isInput:
+                    functionFile.write("    "+command[1]+" = gates."+command[0]+".function([]"+command[2]+"])\n")
+                else:
+                    functionFile.write("    "+command[1]+" = gates."+command[0]+".function("+command[2]+")\n")
             else:
                 functionFile.write("    "+command[1]+" = gates."+command[0]+".function(list((")
                 for i in range(2, len(command)-1):

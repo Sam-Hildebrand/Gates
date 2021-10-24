@@ -68,8 +68,8 @@ def executeGate():
     inputsFromFile = functionFile.readline().split(" ")
     inputs = []
     values = []
-    loopOn = input("Enter 'L' to loop indefinitely (^c to break) or anthing else to run once: ")
-    if loopOn == "L":
+    ltInput = input("Enter 'T' for a truth table, 'L' to loop indefinitely (^c to break), or anthing else to run once: ")
+    if ltInput == "L":
         while True:
             for i in range(1, len(inputsFromFile)):
                 inputs.append(inputsFromFile[i].replace("\n", ""))
@@ -81,6 +81,26 @@ def executeGate():
             for i in gate.function(values):
                 print(i, end="")
             print()
+    elif ltInput == "T":
+        for i in range(1, len(inputsFromFile)):
+            inputs.append(inputsFromFile[i].replace("\n", ""))
+            print(str(inputs[i-1]), end="  ")
+        print("GATE_OUTPUT")
+        for i in range(0, len(inputs)):
+            values.append(1)
+            print(str(values[i]), end="\t")
+        print(gate.function(values))
+        for i in range(1, len(values)+1):
+            values[len(values)-i]=0
+            for i in range(0, len(values)):
+                print(str(values[i]), end="\t")
+            print(gate.function(values))
+        for i in range(1, len(values)):
+            values[len(values)-i]=1
+            for i in range(0, len(values)):
+                print(str(values[i]), end="\t")
+            print(gate.function(values))
+
     else:
         for i in range(1, len(inputsFromFile)):
             inputs.append(inputsFromFile[i].replace("\n", ""))
@@ -93,7 +113,7 @@ def executeGate():
         print()
 
 if __name__ == "__main__":
-    selection= input("Welcome: type 'n' for a new gate, 'e'to execute a gate: ")
+    selection= input("Welcome: type 'n' for a new gate, 'e' to execute a gate: ")
     if selection == "n":
         newGate()
     elif selection == "e":

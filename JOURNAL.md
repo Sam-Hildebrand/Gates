@@ -1,4 +1,8 @@
 
+**10/23/2021, 10:34:06 PM**: The program is complete as far as I am aware. The next step is to spilt it into a
+compiler and an interpreter, then start with some fancy features.
+
+
 **12/2/2020, 1:51:19 PM**: Another possible solution involves using a separate function for each output:
 
 ![](/home/sam/Workspaces/Python/Gates/.journal.assets/.journal-.journal-fb3289f2.jpg)

@@ -54,7 +54,7 @@ def newGate():
             functionFile.write("    import gates."+ command[0]+ "\n")
             if len(command) < 4:
                 for i in inputs:
-                    if command[2] == inputs[i]:
+                    if command[2] == i:
                         functionFile.write("    "+command[1]+" = gates."+command[0]+".function(["+command[2]+"])\n")
                     else:
                         functionFile.write("    "+command[1]+" = gates."+command[0]+".function(["+command[2]+"])\n")

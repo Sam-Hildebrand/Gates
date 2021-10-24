@@ -30,7 +30,7 @@ def newGate():
     functionFile.write(inputs[len(inputs)-1]+"\n")
     functionFile.write("def function (inputs):\n")
     for i in range(0, len(inputs)):
-        functionFile.write("    "+inputs[i]+" = "+"inputs["+str(i)+"]\n")
+        functionFile.write("    "+inputs[i]+" = "+"[inputs["+str(i)+"]]\n")
     showGates()
     print("\nType 'help'for help:\n")
     outputList=[]
@@ -52,21 +52,10 @@ def newGate():
             outputList.append(command[1])
         else:
             functionFile.write("    import gates."+ command[0]+ "\n")
-            if len(command) < 4:
-                for i in inputs:
-                    if command[2] == i:
-                        isInput = True
-                    else:
-                        isInput = False
-                if isInput:
-                    functionFile.write("    "+command[1]+" = gates."+command[0]+".function([]"+command[2]+"])\n")
-                else:
-                    functionFile.write("    "+command[1]+" = gates."+command[0]+".function("+command[2]+")\n")
-            else:
-                functionFile.write("    "+command[1]+" = gates."+command[0]+".function(list((")
-                for i in range(2, len(command)-1):
-                    functionFile.write(command[i]+", ")
-                functionFile.write(command[len(command)-1]+")))\n")
+            functionFile.write("    "+command[1]+" = gates."+command[0]+".function(")
+            for i in range(2, len(command)-1):
+                functionFile.write(command[i]+" + ")
+            functionFile.write(command[len(command)-1]+")\n")
 
 def executeGate():
     showGates()

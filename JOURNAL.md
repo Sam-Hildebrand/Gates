@@ -1,4 +1,7 @@
 
+**10/30/2021, 1:23:00 PM**: I'd like to reinvent this project as an interpreted language that parses a csv file.
+I think with one special gate that implements basically a goto feature I could simulate anything i wanted to in binary.
+
 **10/23/2021, 10:34:06 PM**: The program is complete as far as I am aware. The next step is to spilt it into a
 compiler and an interpreter, then start with some fancy features.
 

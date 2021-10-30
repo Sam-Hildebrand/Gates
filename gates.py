@@ -4,6 +4,16 @@ import os
 import importlib
 import re
 
+# Temporary. This should be itterative.
+def bool_combs(n):
+    if not n:
+        return [[]]
+    result = []
+    for comb in bool_combs(n-1):
+        result.append(comb + [1])
+        result.append(comb + [0])
+    return result
+
 def showGates():
     print("\nHere's a list of all the gates available:")
     files = os.listdir("gates")
@@ -81,22 +91,12 @@ def executeGate():
     elif ltInput == "T":
         for i in range(1, len(inputsFromFile)):
             inputs.append(inputsFromFile[i].replace("\n", ""))
-            print(str(inputs[i-1]), end="  ")
+            print(str(inputs[i-1]), end="\t")
         print("GATE_OUTPUT")
-        for i in range(0, len(inputs)):
-            values.append(1)
-            print(str(values[i]), end="\t")
-        print(gate.function(values))
-        for i in range(1, len(values)+1):
-            values[len(values)-i]=0
-            for i in range(0, len(values)):
-                print(str(values[i]), end="\t")
-            print(gate.function(values))
-        for i in range(1, len(values)):
-            values[len(values)-i]=1
-            for i in range(0, len(values)):
-                print(str(values[i]), end="\t")
-            print(gate.function(values))
+        for line in bool_combs(len(inputsFromFile)-1):
+            for value in line:
+                print(str(value), end="\t")
+            print(gate.function(line))
 
     else:
         for i in range(1, len(inputsFromFile)):
